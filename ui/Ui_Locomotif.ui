@@ -6,20 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>873</width>
+    <height>682</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QwtPlot" name="qwtPlot">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>120</y>
+      <width>551</width>
+      <height>311</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>873</width>
      <height>21</height>
     </rect>
    </property>
@@ -27,6 +38,8 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionOpen_GPS_File"/>
+    <addaction name="actionOpen_Project"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -39,8 +52,10 @@
       <string>Window</string>
      </property>
      <addaction name="actionQuick_Command_Box"/>
+     <addaction name="actionStatus_Box"/>
     </widget>
     <addaction name="menuWindow"/>
+    <addaction name="separator"/>
     <addaction name="actionHelp"/>
    </widget>
    <addaction name="menuFile"/>
@@ -48,33 +63,122 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="QuickCommand">
+   <property name="acceptDrops">
+    <bool>true</bool>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bla Bla ...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);</string>
+   </property>
    <property name="floating">
     <bool>false</bool>
    </property>
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
+   <property name="windowTitle">
+    <string>Commands</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="cmdLoadFile">
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="cmdLoadGPSFile">
        <property name="text">
         <string>open GPS File</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="5" column="0">
       <widget class="QPushButton" name="cmdLoadProject">
        <property name="text">
         <string>open Project</string>
        </property>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="cmdLoadDataFile">
+       <property name="text">
+        <string>open Data File</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QDockWidget" name="QuickStatus">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Status</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Datendatei</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="loadedDataFileName">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="QuickEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Edit</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4"/>
   </widget>
   <action name="actionQuit">
    <property name="text">
@@ -82,6 +186,12 @@
    </property>
   </action>
   <action name="actionQuick_Command_Box">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Quick Command Box</string>
    </property>
@@ -91,7 +201,35 @@
     <string>Help</string>
    </property>
   </action>
+  <action name="actionOpen_GPS_File">
+   <property name="text">
+    <string>Open GPS File...</string>
+   </property>
+  </action>
+  <action name="actionOpen_Project">
+   <property name="text">
+    <string>Open Project...</string>
+   </property>
+  </action>
+  <action name="actionStatus_Box">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Status Box</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QwtPlot</class>
+   <extends>QFrame</extends>
+   <header>qwt_plot.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -126,5 +264,107 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionStatus_Box</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>QuickStatus</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>49</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Project</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>Locomotif</receiver>
+   <slot>openProjectFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLoadGPSFile</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Locomotif</receiver>
+   <slot>openGPSFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLoadProject</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Locomotif</receiver>
+   <slot>openProjectFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>32</x>
+     <y>134</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_GPS_File</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>Locomotif</receiver>
+   <slot>openGPSFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLoadDataFile</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Locomotif</receiver>
+   <slot>openDataFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>47</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>openUserFile()</slot>
+  <slot>openGPSFile()</slot>
+  <slot>openProjectFile()</slot>
+  <slot>openDataFile()</slot>
+ </slots>
 </ui>

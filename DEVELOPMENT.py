@@ -9,7 +9,9 @@ import os
 # this does not work in  the console
 os.chdir(os.path.dirname(__file__))
 # this is for the console, comment if script is run
-os.chdir("C:/Users/Mirko/SkyDrive/python/locomotifGUI")
+# os.chdir("C:/Users/Mirko/SkyDrive/python/locomotifGUI")
+os.chdir("C:/User/thomas.sonstiges/GitHub/locomotifGUI")
+
 
 # After a UI file was created using QtDesigner, this has to be translated into
 # a python class. The PyQt4 modules has a uic submodule for compiling ui files.
@@ -85,3 +87,5 @@ loc.Mapper(Style='Voronoi_index', size=(1920, 1024), datasource=res2, out_path="
 # datasource can also be an absolute path of a Shapefile like the one above.
 # out_path is the absolute path and filename for the rendered map. valid file types are: png, jpg, svg, pdf 
 # and ::memory:: to save map as File-Like_object in RAM
+=======
+uic.compileUiDir("tools/")
